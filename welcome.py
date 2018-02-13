@@ -36,6 +36,16 @@ else:
     NLC_USERNAME = ""
     NLC_PASSWORD = ""
 
+# For local deploy
+HOST='0.0.0.0'
+VCAP_APPLICATION = os.getenv("VCAP_APPLICATION")
+if VCAP_APPLICATION is not None:
+    APP = json.loads(VCAP_APPLICATION)
+    HOST = APP['application_uris'][0]
+    VCAP_HOST = SERVICES
+
+print("HOST: " + HOST)
+
 NLC_SERVICE = NaturalLanguageClassifierV1(
     username=NLC_USERNAME,
     password=NLC_PASSWORD

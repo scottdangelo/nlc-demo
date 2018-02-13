@@ -13,4 +13,4 @@ applications:
   command: python welcome.py
   random-route: true
   services:
-  - ICD-10Classifier
+  - ICD10-NLC-service
