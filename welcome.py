@@ -12,10 +12,13 @@
 
 import json
 import os
+import metrics_tracker_client
 import requests
 
 from flask import Flask, jsonify, render_template, request
 from watson_developer_cloud import NaturalLanguageClassifierV1
+
+metrics_tracker_client.track()
 
 app = Flask(__name__)
 
@@ -32,6 +35,16 @@ else:
     # Set these here for local development
     NLC_USERNAME = ""
     NLC_PASSWORD = ""
+
+# For local deploy
+HOST='0.0.0.0'
+VCAP_APPLICATION = os.getenv("VCAP_APPLICATION")
+if VCAP_APPLICATION is not None:
+    APP = json.loads(VCAP_APPLICATION)
+    HOST = APP['application_uris'][0]
+    VCAP_HOST = SERVICES
+
+print("HOST: " + HOST)
 
 NLC_SERVICE = NaturalLanguageClassifierV1(
     username=NLC_USERNAME,
