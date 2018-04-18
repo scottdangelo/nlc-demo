@@ -2,7 +2,7 @@
 declared-services:
   ICD10-NLC-service:
     label: natural_language_classifier
-    plan: lite
+    plan: Standard
 applications:
 - name: ICD10-nlc-demo
   path: .
